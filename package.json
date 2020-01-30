@@ -17,19 +17,6 @@
         "react-naive",
         "daum map"
     ],
-    "rnpm": {
-        "ios": {
-            "sharedLibraries": [
-                "libxml2",
-                "libsqlite3",
-                "SystemConfiguration",
-                "CoreLocation",
-                "OpenGLES",
-                "QuartzCore",
-                "libc++"
-            ]
-        }
-    },
     "author": "JeongHun Kang <asata@teamsf.co.kr>",
     "license": "MIT",
     "bugs": {
