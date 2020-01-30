@@ -72,9 +72,17 @@ public class DaumMapManager extends SimpleViewManager<View> implements MapView.M
 		int    zoomLevel 	= initialRegion.hasKey("zoomLevel") ? initialRegion.getInt("zoomLevel") : 2;
 
 		if (!initialRegionSet) {
-			mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), zoomLevel, true);
+			mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude, longitude), zoomLevel, false);
 			initialRegionSet = true;
 		}
+	}
+
+	@ReactProp(name = "region")
+	public void setRegion(MapView mMapView, ReadableMap region) {
+		double latitude 	= region.hasKey("latitude") ? region.getDouble("latitude") : 36.143099;
+		double longitude	= region.hasKey("longitude") ? region.getDouble("longitude") : 128.392905;
+
+		mMapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true);
 	}
 
 	@ReactProp(name = "mapType")
