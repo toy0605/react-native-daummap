@@ -27,7 +27,7 @@
                                                                self.bounds.size.width,
                                                                self.bounds.size.height)];
         _mapView.delegate = self;
-        _mapView.baseMapType = MTMapTypeHybrid;
+        _mapView.baseMapType = MTMapTypeStandard;
 
         _latdouble  = 36.143099;
         _londouble  = 128.392905;
@@ -47,7 +47,7 @@
     [self addSubview:_mapView];
 }
 
-- (void) initialRegion:(NSDictionary *)region {
+- (void) setInitialRegion:(NSDictionary *)region {
     if ([region valueForKey:@"latitude"] != [NSNull null]) {
         _latdouble = [[region valueForKey:@"latitude"] floatValue];
     }
@@ -59,7 +59,7 @@
     }
 }
 
-- (void) markers:(NSArray *)markers {
+- (void) setMarkers:(NSArray *)markers {
     NSArray *markerList = [NSArray arrayWithObjects: NULL];
 
     for (int i = 0; i < [markers count]; i++) {
@@ -112,12 +112,14 @@
         markerItem.showDisclosureButtonOnCalloutBalloon = NO;
 
         markerList = [markerList arrayByAddingObject: markerItem];
+        
     }
 
     [_mapView addPOIItems:markerList];
+    [_mapView fitMapViewAreaToShowAllPOIItems];
 }
 
-- (void) mapType:(NSString *)mapType {
+- (void) setMapType:(NSString *)mapType {
     mapType = [mapType lowercaseString];
     if ([mapType isEqualToString:@"standard"]) {
         _mapView.baseMapType = MTMapTypeStandard;
@@ -130,7 +132,7 @@
     }
 }
 
-- (void) region:(NSDictionary *)region {
+- (void) setRegion:(NSDictionary *)region {
     if ([region valueForKey:@"latitude"] != [NSNull null] && [region valueForKey:@"longitude"] != [NSNull null]) {
         float latdouble = [[region valueForKey:@"latitude"] floatValue];
         float londouble = [[region valueForKey:@"longitude"] floatValue];
@@ -139,21 +141,21 @@
     }
 }
 
-- (void) isCurrentMarker: (BOOL)isCurrentMarker {
+- (void) setIsCurrentMarker: (BOOL)isCurrentMarker {
     [_mapView setShowCurrentLocationMarker:isCurrentMarker];
 }
 
-- (void) isTracking:(BOOL)isTracking {
+- (void) setIsTracking:(BOOL)isTracking {
     _isTracking = isTracking;
     [self setMapTracking];
 }
 
-- (void) isCompass:(BOOL)isCompass {
+- (void) setIsCompass:(BOOL)isCompass {
     _isCompass = isCompass;
     [self setMapTracking];
 }
 
-- (void) polyLines:(NSDictionary *) polyLines {
+- (void) setPolyLines:(NSDictionary *) polyLines {
     [_mapView removeAllPolylines];
 
     if ([polyLines valueForKey:@"points"] != [NSNull null]) {
@@ -183,7 +185,7 @@
     }
 }
 
-- (void) circles: (NSArray *) circles {
+- (void) setCircles: (NSArray *) circles {
     [_mapView removeAllCircles];
 
     for (int i = 0; i < [circles count]; i++) {

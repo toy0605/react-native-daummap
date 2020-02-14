@@ -19,6 +19,9 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
   s.vendored_frameworks = "ios/DaumMap.framework"
+  s.resources_bundle = {
+    "DaumMap" => ["ios/Resources/*.png"]
+  }
 
   s.dependency "React"
   # ...
