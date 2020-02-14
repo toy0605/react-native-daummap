@@ -47,7 +47,7 @@
     [self addSubview:_mapView];
 }
 
-- (void) setInitialRegion:(NSDictionary *)region {
+- (void) initialRegion:(NSDictionary *)region {
     if ([region valueForKey:@"latitude"] != [NSNull null]) {
         _latdouble = [[region valueForKey:@"latitude"] floatValue];
     }
@@ -59,7 +59,7 @@
     }
 }
 
-- (void) setMarkers:(NSArray *)markers {
+- (void) markers:(NSArray *)markers {
     NSArray *markerList = [NSArray arrayWithObjects: NULL];
 
     for (int i = 0; i < [markers count]; i++) {
@@ -117,7 +117,7 @@
     [_mapView addPOIItems:markerList];
 }
 
-- (void) setMapType:(NSString *)mapType {
+- (void) mapType:(NSString *)mapType {
     mapType = [mapType lowercaseString];
     if ([mapType isEqualToString:@"standard"]) {
         _mapView.baseMapType = MTMapTypeStandard;
@@ -130,7 +130,7 @@
     }
 }
 
-- (void) setRegion:(NSDictionary *)region {
+- (void) region:(NSDictionary *)region {
     if ([region valueForKey:@"latitude"] != [NSNull null] && [region valueForKey:@"longitude"] != [NSNull null]) {
         float latdouble = [[region valueForKey:@"latitude"] floatValue];
         float londouble = [[region valueForKey:@"longitude"] floatValue];
@@ -139,21 +139,21 @@
     }
 }
 
-- (void) setIsCurrentMarker: (BOOL)isCurrentMarker {
+- (void) isCurrentMarker: (BOOL)isCurrentMarker {
     [_mapView setShowCurrentLocationMarker:isCurrentMarker];
 }
 
-- (void) setIsTracking:(BOOL)isTracking {
+- (void) isTracking:(BOOL)isTracking {
     _isTracking = isTracking;
     [self setMapTracking];
 }
 
-- (void) setIsCompass:(BOOL)isCompass {
+- (void) isCompass:(BOOL)isCompass {
     _isCompass = isCompass;
     [self setMapTracking];
 }
 
-- (void) setPolyLines:(NSDictionary *) polyLines {
+- (void) polyLines:(NSDictionary *) polyLines {
     [_mapView removeAllPolylines];
 
     if ([polyLines valueForKey:@"points"] != [NSNull null]) {
@@ -183,7 +183,7 @@
     }
 }
 
-- (void) setCircles: (NSArray *) circles {
+- (void) circles: (NSArray *) circles {
     [_mapView removeAllCircles];
 
     for (int i = 0; i < [circles count]; i++) {
